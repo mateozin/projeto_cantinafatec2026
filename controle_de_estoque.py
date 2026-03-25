@@ -10,7 +10,7 @@ class Produto:
         self.quantidade = quantidade
 
     def __str__(self):
-        return f"Produto: {self.nome} \nPreço de compra: R${self.preco_compra} \nPreço de venda: R${self.preco_venda} \nQuantidade: {self.quantidade} \nComprado no dia: {self.data_compra.date()} \nValidade: {self.data_validade.date()}"
+        return f"[ESTOQUE] Produto: {self.nome} | Preço de venda: R${self.preco_venda} | Quantidade: {self.quantidade} \n Comprado no dia: {self.data_compra.date()} e vence no dia {self.data_validade.date()}"
 
 class No:
     def __init__(self, produto):
@@ -75,3 +75,18 @@ class ListaProdutos:
                 return f"Adicionando +{add_quantidade} para o estoque de {nome}"
             atual = atual.proximo
         return f"Produto não encontrado"
+
+    def baixar_estoque(self, nome_produto, quantidade):
+        atual = self.inicio
+
+        while atual:
+            if atual.produto.nome == nome_produto:
+                if atual.produto.quantidade < quantidade:
+                    return False, f"Estoque insuficiente"
+            
+                atual.produto.quantidade -= quantidade
+                return True, f"Compra efetuada, quantidade em estoque reduzida"
+
+            atual = atual.proximo
+
+        return False, f"Produto inválido"
