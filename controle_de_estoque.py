@@ -67,14 +67,14 @@ class ListaProdutos:
     
     def adicionar_quantidade(self, nome, add_quantidade):
         if add_quantidade <= 0:
-            return f"Quantidade inválida"
+            return False, f"Quantidade inválida"
         atual = self.inicio
         while atual:
             if atual.produto.nome == nome:
                 atual.produto.quantidade += add_quantidade
-                return f"Adicionando +{add_quantidade} para o estoque de {nome}"
+                return True, f"Adicionando +{add_quantidade} para o estoque de {nome}"
             atual = atual.proximo
-        return f"Produto não encontrado"
+        return False, f"Produto não encontrado"
 
     def baixar_estoque(self, nome_produto, quantidade):
         atual = self.inicio

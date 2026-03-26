@@ -19,6 +19,17 @@ class ListaConsumo:
     def __init__(self):
         self.inicio = None
 
+    def inserir_consumo(self, consumo):
+        novo = NoConsumo(consumo)
+
+        if self.inicio is None:
+            self.inicio = novo
+        else:
+            atual = self.inicio
+            while atual.proximo:
+                atual = atual.proximo
+            atual.proximo = novo
+
     def listar(self):
         atual = self.inicio
         while atual:
