@@ -17,7 +17,7 @@ def gerar_produtos(lista_produtos, n=10):
         preco_venda = random.randint(1, 18)
         preco_compra = round(preco_venda * 0.6, 2)
 
-        data_compra = fake.date_this_year().strftime("%d/%m/%Y")
+        data_compra = fake.date_between(start_date="-40d", end_date="+1d").strftime("%d/%m/%Y")
         data_validade = fake.date_between(start_date="today", end_date="+30d").strftime("%d/%m/%Y")
 
         quantidade = random.randint(10, 50)
@@ -52,7 +52,7 @@ def simular_consumos(lista_produtos, lista_pagamentos, lista_consumo, n=10):
         curso = random.choice(cursos)
 
         valor_total = produto.preco_venda * quantidade
-        data = fake.date_time_this_year().strftime("%d/%m/%Y %H:%M")
+        data = fake.date_time_between(start_date="+2d", end_date="+50d").strftime("%d/%m/%Y %H:%M")
 
         if lista_produtos.baixar_estoque(produto.nome, quantidade):
 
